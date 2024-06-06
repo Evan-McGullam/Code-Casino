@@ -3,7 +3,6 @@ aceval = 0
 againloop = 0
 answerval = 0
 exitgame = 3
-houseturn = 0
 while start == 0:
   print("--------------------------------------------------")
   print("--------------------------------------------------")
@@ -75,7 +74,6 @@ while answerval == 0:
         exitcontloop = 1
         bust = 1
         answerval = 1
-        houseturn = 1
         break
       while againloop == 0:
         exitcontloop = input("Would you like to hit again or stand?")
@@ -85,7 +83,6 @@ while answerval == 0:
           bust = 1
           againloop = 1
           answerval = 1
-          houseturn = 1
           break
         elif exitcontloop.lower() == "hit":
           while continuedhit == 0:
@@ -95,8 +92,8 @@ while answerval == 0:
               print("You lose! Total exceeds 21 :(")
               bust = 1
               exitcontloop = 1
-              answerval = 1
               againloop = 1
+              answerval = 1
               break
             elif newtotalcard == 21:
               print("You have 21! Blackjack!")
@@ -104,7 +101,6 @@ while answerval == 0:
               exitcontloop = 1
               againloop = 1
               answerval = 1
-              houseturn = 1
               break
         else:
           print("Please enter a valid input. Only 'Hit' or 'Stand' are accepted.")
@@ -114,90 +110,75 @@ while answerval == 0:
             bust = 1
             againloop = 1
             answerval = 1
-            houseturn = 1
-            again = 1
           elif again.lower() == "hit":
             continuedhit = 0
-            again = 0
-            newtotalcard = newtotalcard + random.randint(1,11)
-            print("Your new total is",newtotalcard)
-            if newtotalcard > 21:
-              print("You lose! Total exceeds 21 :(")
-              bust = 1
-              exitcontloop = 1
-              answerval = 1
-              againloop = 1
-              break
-            elif newtotalcard == 21:
-              print("You have 21! Blackjack!")
-              bust = 1
-              exitcontloop = 1
-              againloop = 1
-              answerval = 1
-              houseturn = 1
-              break
           else:
             print("Please enter a valid input. Only 'Hit' or 'Stand' are accepted.")
-            again = 0
     elif startcard1 + startcard2 == 21:
         print("You have 21! Blackjack!")
         answerval = 1
         bust = 1
-        houseturn = 1
         break
     elif rehit.lower() == "stand":
         newtotalcard = totalcard
         bust = 1
         answerval = 1
-        houseturn = 1
     elif continuedhit ==1:
         bust = 1
         answerval = 1
     else:
-      print("Please enter a valid input")
+      print("Please input a valid input")
       answerval = 0
       bust = 1
-      
-ovospecialcard = startcard1 + startcard2
-while houseturn == 1:
+
+while bust == 1:
+  if newtotalcard == 21:
     print("--------------------------------------------------")
     print("The housetotal is", housestart1+housestart2)
     housetotal = housestart1+housestart2
-    if ovospecialcard == 21:
+    while housetotal < 17:
+      print("The house has less than 16, so the house will hit.")
+      housetotal = housetotal + random.randint(1,11)
+      print("The new house total is",housetotal)
+    if housetotal == 21 and newtotalcard == 21:
+      print("You and the house have 21! It's a draw!")
+      bust = 2
+    elif housetotal > 21:
+      print("The house has busted! You win!")
+      bust = 2
+    elif housetotal > newtotalcard:
+      print("The house has a higher total than you! You lose!")
+      bust = 2
+    elif housetotal < newtotalcard:
+      print("You have a higher total than the house! You win!")
+      bust = 2
+  elif newtotalcard < 21:
+    print("--------------------------------------------------")
+    print("The housetotal is", housestart1+housestart2)
+    housetotal = housestart1+housestart2
+    if totalcard or newtotalcard == 21:
       if housetotal == 21:
         print("House has blackjack! Push.")
         break
-      elif housetotal != 21:
-        print("You win! asd")
-        break
-    elif newtotalcard == 21:
-      if housetotal == 21:
-        print("House has blackjack! Push.")
-        break
-      elif housetotal != 21:
+      else:
         print("You win!")
         break
-    else:
-      while housetotal < 16:
-        print("The house has less than 16, so the house will hit.")
-        housetotal = housetotal + random.randint(1,11)
-        print("The new house total is",housetotal)
-      if housetotal == 21 and newtotalcard == 21:
-        print("You and the house have 21! It's a draw!")
-        bust = 2
-        break
-      elif housetotal > 21:
-        print("The house has busted! You win!")
-        bust = 2
-        break
-      elif housetotal > newtotalcard:
-        print("The house has a higher total than you! You lose!")
-        bust = 2
-        break
-      elif housetotal < newtotalcard:
-        print("You have a higher total than the house! You win!")
-        bust = 2
-        break
+    while housetotal < 16:
+      print("The house has less than 16, so the house will hit.")
+      housetotal = housetotal + random.randint(1,11)
+      print("The new house total is",housetotal)
+    if housetotal == 21 and newtotalcard == 21:
+      print("You and the house have 21! It's a draw!")
+      bust = 2
+    elif housetotal > 21:
+      print("The house has busted! You win!")
+      bust = 2
+    elif housetotal > newtotalcard:
+      print("The house has a higher total than you! You lose!")
+      bust = 2
+    elif housetotal < newtotalcard:
+      print("You have a higher total than the house! You win!")
+      bust = 2
 
 while exitgame == 3:
   from subprocess import call
@@ -205,5 +186,3 @@ while exitgame == 3:
       call(["python", "index.py"])
   open_py_file()
   exitgame = 4
-
-#praise the lord im done!!!
