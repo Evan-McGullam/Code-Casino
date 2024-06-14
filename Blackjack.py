@@ -148,8 +148,8 @@ while houseturn == 1:
         print("You win!")
         break
     else:
-      while housetotal < 17:
-        print("The house has less than 17, so the house will hit.")
+      while housetotal < 16:
+        print("The house has less than 16, so the house will hit.")
         housetotal = housetotal + random.randint(1,11)
         print("The new house total is",housetotal)
       if housetotal == 21 and newtotalcard == 21:
@@ -170,5 +170,10 @@ while houseturn == 1:
         break
 
 while exitgame == 3:
+  from subprocess import call
+  def open_py_file():
+      call(["python", "index.py"])
+  open_py_file()
+  exitgame = 4
 
 #praise the lord im done!!!
