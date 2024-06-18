@@ -4,6 +4,7 @@ againloop = 0
 answerval = 0
 exitgame = 3
 houseturn = 0
+
 while start == 0:
   print("--------------------------------------------------")
   print("--------------------------------------------------")
@@ -17,6 +18,7 @@ while start == 0:
     print("Come back any time!")
   else:
     print("Please enter a valid input. Only 'Yes' or 'No' are accepted.")
+
 bust = 0
 initial = 0
 hit = 0
@@ -25,8 +27,10 @@ startcard1 = random.randint(1,11)
 startcard2 = random.randint(1,11)
 housestart1 = random.randint(1,11)
 housestart2 = random.randint(1,11)
+
 print("Your starting cards are", startcard1, "and", startcard2,", totalling", startcard1+startcard2)
 totalcard = startcard1+startcard2
+
 while aceval == 0:
   if startcard1 == 11 and startcard2 == 11:
     print("You have 2 Aces! Would you like your total to be 12 or 2?")
@@ -50,12 +54,15 @@ while aceval == 0:
     aceval = 1
   else:
     print("Please input a valid option.")
+
 print("The House's starting cards are", housestart1, "and X, totalling", housestart1, "+ X. Remember the House still has one card face down (X).")
 totalcard = startcard1+startcard2
 print("Would you like to hit or stand? Remember anything above 21 is a bust.")
+
 initial = 1
 continuedhit = 0
 newtotalcard = 0
+
 while answerval == 0:
   rehit = input("Hit or Stand?")
   bust = 0
@@ -175,5 +182,3 @@ while exitgame == 3:
       call(["python", "index.py"])
   open_py_file()
   exitgame = 4
-
-#praise the lord im done!!!
